@@ -1,107 +1,501 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inmobiliaria ARQ | Arquitectura Virtual en Habbo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Inter for readable text, Silkscreen for pixel art headings -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        pixel: ['Silkscreen', 'cursive'],
+                    },
+                    colors: {
+                        'habbo-blue': '#1F8CFF',
+                        'habbo-dark': '#0f172a',
+                        'habbo-gold': '#FFD700',
+                        'habbo-green': '#4ade80',
+                        'hc-dark': '#111827'
+                    },
+                    backgroundImage: {
+                        'habbo-pattern': "url('https://images.habbo.com/habboweb/63_1dc60c6d6ea6e089c6893ab4e0541ee0/10404/web-gallery/v2/images/bg_pattern.png')",
+                        'room-gradient': 'linear-gradient(135deg, rgba(31,140,255,0.1) 0%, rgba(15,23,42,0.8) 100%)'
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .bg-arq-blue { background-color: #0055ff; }
-        .text-arq-blue { color: #0055ff; }
-        .border-arq-wood { border-color: #8B4513; }
-        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('tu-sala-background.jpg') center/cover; }
+        /* Modern Glassmorphism combined with pixel borders */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .pixel-border {
+            box-shadow:
+                -2px 0 0 0 white,
+                2px 0 0 0 white,
+                0 -2px 0 0 white,
+                0 2px 0 0 white;
+            border-radius: 2px;
+        }
+
+        .habbo-pill {
+            background: #fff;
+            border-radius: 999px;
+            box-shadow: 0 4px 0 #cbd5e1;
+            transition: all 0.1s;
+        }
+
+        .habbo-pill:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #cbd5e1;
+        }
+
+        /* Habbo chat bubble */
+        .chat-bubble {
+            position: relative;
+            background: white;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+            color: black;
+            font-size: 0.9rem;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid white;
+        }
+
+        .chat-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 19px;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 7px solid #e2e8f0;
+            z-index: -1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1F8CFF;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
+        }
     </style>
 </head>
-<body class="bg-slate-50">
 
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <div class="bg-black text-white px-3 py-1 font-extrabold text-xl rounded">ARQ</div>
-            <span class="font-semibold tracking-tighter text-slate-700">INMOBILIARIA</span>
+<body class="bg-habbo-dark text-slate-200 font-sans selection:bg-habbo-blue selection:text-white">
+
+    <!-- Navbar -->
+    <nav
+        class="fixed w-full z-50 glass-panel border-b border-white/10 px-6 py-4 flex justify-between items-center top-0 transition-all duration-300">
+        <div class="flex items-center gap-3 group cursor-pointer">
+            <div
+                class="bg-habbo-blue px-3 py-1 font-pixel text-xl rounded pixel-border text-white group-hover:bg-habbo-gold group-hover:text-black transition-colors">
+                ARQ
+            </div>
+            <span class="font-bold tracking-tight text-white hidden sm:block">INMOBILIARIA</span>
+            <span class="ml-2 flex items-center">
+                <span class="relative flex h-3 w-3">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-habbo-green opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-habbo-green"></span>
+                </span>
+                <span class="text-xs text-habbo-green ml-2 font-pixel">ONLINE</span>
+            </span>
         </div>
-        <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
-            <a href="#proyectos" class="hover:text-arq-blue transition">Proyectos</a>
-            <a href="#servicios" class="hover:text-arq-blue transition">Servicios</a>
-            <a href="#nosotros" class="hover:text-arq-blue transition">Nosotros</a>
+
+        <div class="hidden md:flex gap-8 text-sm font-medium text-slate-300">
+            <a href="#proyectos"
+                class="hover:text-habbo-gold transition-colors font-pixel text-xs tracking-wider">PROYECTOS</a>
+            <a href="#servicios"
+                class="hover:text-habbo-gold transition-colors font-pixel text-xs tracking-wider">SERVICIOS</a>
+            <a href="#nosotros"
+                class="hover:text-habbo-gold transition-colors font-pixel text-xs tracking-wider">COMUNIDAD</a>
         </div>
-        <a href="https://www.habbo.es/" target="_blank" class="bg-arq-blue text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
-            Contactar en Habbo
+
+        <a href="https://www.habbo.es/" target="_blank"
+            class="bg-habbo-blue text-white px-6 py-2 rounded font-bold hover:bg-blue-600 transition shadow-[0_0_15px_rgba(31,140,255,0.4)] hover:shadow-[0_0_25px_rgba(31,140,255,0.7)] flex items-center gap-2">
+            <img src="https://images.habbo.com/c_images/catalogue/icon_256.png" class="w-4 h-4" alt="Credits"
+                style="image-rendering: pixelated;">
+            <span>Contactar</span>
         </a>
     </nav>
 
-    <section class="relative h-[80vh] flex items-center justify-center text-center px-6 hero-gradient">
-        <div class="max-w-4xl">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
-                Espacios que definen tu <span class="text-arq-blue">legado virtual</span>.
-            </h1>
-            <p class="text-xl text-slate-200 mb-10 max-w-2xl mx-auto">
-                Especialistas en diseño arquitectónico y gestión de proyectos para la comunidad de Manizales y el mundo digital.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#proyectos" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-slate-100 transition">Explorar Catálogo</a>
-                <a href="#contacto" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 backdrop-blur-sm transition">Solicitar Diseño</a>
-            </div>
-        </div>
-    </section>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-habbo-dark">
+        <!-- Isometric Background Elements -->
+        <div class="absolute inset-0 z-0 bg-habbo-pattern opacity-5 mix-blend-overlay"></div>
+        <div class="absolute inset-0 z-0 bg-room-gradient"></div>
 
-    <section id="servicios" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-3 gap-12">
-            <div class="space-y-4">
-                <div class="w-12 h-1 bg-arq-blue"></div>
-                <h3 class="text-2xl font-bold">Diseño ARQ</h3>
-                <p class="text-slate-600">Creación de salas con estéticas que mezclan lo moderno (cristal/azul) con lo clásico (madera/piedra).</p>
-            </div>
-            <div class="space-y-4">
-                <div class="w-12 h-1 bg-arq-blue"></div>
-                <h3 class="text-2xl font-bold">Project Management</h3>
-                <p class="text-slate-600">Gestión certificada de obras virtuales, desde el concepto hasta la entrega de llaves.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="w-12 h-1 bg-arq-blue"></div>
-                <h3 class="text-2xl font-bold">Seguridad Digital</h3>
-                <p class="text-slate-600">Consultoría en ciberseguridad para proteger tus activos y salas de accesos no autorizados.</p>
-            </div>
+        <!-- Animated floating elements in background -->
+        <div
+            class="absolute top-1/4 left-10 md:left-1/4 w-32 h-32 bg-habbo-blue/20 rounded-full blur-3xl animate-pulse-slow">
         </div>
-    </section>
+        <div class="absolute bottom-1/4 right-10 md:right-1/4 w-40 h-40 bg-habbo-gold/10 rounded-full blur-3xl animate-pulse-slow"
+            style="animation-delay: 1s;"></div>
 
-    <section id="proyectos" class="bg-slate-900 py-24 px-6 text-white">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
-            <div class="md:w-1/2">
-                <span class="text-arq-blue font-bold tracking-widest uppercase text-sm">Proyecto Destacado</span>
-                <h2 class="text-4xl font-bold mt-4 mb-6">Escalinata Real: Texturas de Vanguardia</h2>
-                <p class="text-slate-400 text-lg mb-8 leading-relaxed">
-                    Un ejemplo de nuestra capacidad para fusionar bloques de piedra tallada con acabados en madera noble y acentos en rojo intenso, ideal para palacios o sedes universitarias.
+        <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+
+            <div class="max-w-xl text-left">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-6 backdrop-blur-sm">
+                    <img src="https://images.habbo.com/c_images/catalogue/icon_195.png" alt="Badge" class="w-4 h-4"
+                        style="image-rendering: pixelated;">
+                    <span class="text-xs font-semibold text-habbo-gold tracking-wider">DISEÑADORES CERTIFICADOS</span>
+                </div>
+
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                    Construye tu <br>
+                    <span
+                        class="font-pixel text-habbo-blue text-4xl md:text-6xl lg:text-7xl drop-shadow-[0_0_10px_rgba(31,140,255,0.8)]">Imperio</span>
+                    Virtual
+                </h1>
+
+                <p class="text-lg md:text-xl text-slate-300 mb-8 font-light">
+                    Elevamos la arquitectura de Habbo combinando estética premium, funcionalidad y diseño magistral.
+                    Salas que no solo existen, sino que <strong class="text-white">destacan</strong>.
                 </p>
-                <ul class="space-y-3 mb-8">
-                    <li class="flex items-center gap-2"><span class="text-arq-blue">✔</span> Acabados en piedra y madera</li>
-                    <li class="flex items-center gap-2"><span class="text-arq-blue">✔</span> Integración de alfombras de lujo</li>
-                    <li class="flex items-center gap-2"><span class="text-arq-blue">✔</span> Diseño optimizado para tránsito</li>
-                </ul>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#proyectos"
+                        class="habbo-pill text-black px-8 py-3 font-bold text-center flex items-center justify-center gap-2">
+                        Explorar Catálogo
+                    </a>
+                    <a href="#servicios"
+                        class="glass-panel text-white px-8 py-3 rounded-full font-bold text-center hover:bg-white/10 transition">
+                        Nuestros Servicios
+                    </a>
+                </div>
             </div>
-            <div class="md:w-1/2">
-                <div class="relative">
-                    <img src="image_5ddc9e.png" alt="Detalle Arquitectónico" class="rounded-2xl border-arq-wood border-b-8 shadow-2xl">
-                    <div class="absolute -bottom-6 -left-6 bg-arq-blue p-6 rounded-xl shadow-xl">
-                        <p class="text-xs uppercase tracking-widest opacity-80">Estado</p>
-                        <p class="text-xl font-bold">DISPONIBLE</p>
+
+            <!-- Avatar Header Graphic (Modern mixed with Habbo) -->
+            <div class="relative hidden md:flex justify-center items-center h-[500px]">
+                <!-- Glowing platform -->
+                <div class="absolute bottom-10 w-64 h-16 bg-habbo-blue/30 rounded-[100%] blur-xl"></div>
+
+                <!-- Main Avatar (Using Habbo Imaging API) -->
+                <div class="relative z-10 animate-float flex flex-col items-center">
+                    <div class="chat-bubble mb-2 animate-bounce">
+                        ¡Bienvenidos a Inmobiliaria ARQ! 🏢✨
+                    </div>
+                    <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=Nawill&direction=2&head_direction=2&gesture=sml&action=wav&size=l"
+                        alt="Arquitecto Jefe" class="drop-shadow-2xl" style="image-rendering: pixelated;">
+                </div>
+
+                <!-- Floating prop 1 -->
+                <img src="https://images.habbo.com/c_images/catalogue/icon_256.png"
+                    class="absolute top-20 right-20 animate-float w-12 h-12"
+                    style="animation-delay: 0.5s; image-rendering: pixelated;" alt="Credits">
+
+                <!-- Floating prop 2 -->
+                <img src="https://images.habbo.com/c_images/catalogue/icon_214.png"
+                    class="absolute bottom-32 left-10 animate-float w-16 h-16"
+                    style="animation-delay: 1.2s; image-rendering: pixelated;" alt="Duck">
+            </div>
+
+        </div>
+
+        <!-- Decorative bottom separator -->
+        <div class="absolute bottom-0 w-full h-24 bg-gradient-to-t from-hc-dark to-transparent"></div>
+    </section>
+
+    <!-- Stats/Banner -->
+    <div class="bg-hc-dark border-y border-white/5 py-6">
+        <div class="container mx-auto px-6 flex flex-wrap justify-around items-center gap-8 text-center sm:text-left">
+            <div class="flex items-center gap-4">
+                <span class="text-4xl font-pixel text-habbo-gold">50+</span>
+                <span
+                    class="text-sm text-slate-400 font-bold uppercase tracking-widest leading-tight">Proyectos<br>Entregados</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-4xl font-pixel text-habbo-blue">10k</span>
+                <span
+                    class="text-sm text-slate-400 font-bold uppercase tracking-widest leading-tight">Bloques<br>Colocados</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-4xl font-pixel text-habbo-green">100%</span>
+                <span
+                    class="text-sm text-slate-400 font-bold uppercase tracking-widest leading-tight">Clientes<br>Satisfechos</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-24 px-6 relative bg-[#0B1120]">
+        <!-- Subtle grid background -->
+        <div class="absolute inset-0"
+            style="background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;">
+        </div>
+
+        <div class="container mx-auto max-w-7xl relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Servicios <span
+                        class="font-pixel text-habbo-blue">Premium</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Elevamos los estándares de construcción virtual. Ofrecemos
+                    soluciones integrales para agencias, imperios y coleccionistas.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 group border-t-4 border-t-habbo-blue">
+                    <div
+                        class="w-14 h-14 rounded-full bg-habbo-blue/20 flex items-center justify-center mb-6 border border-habbo-blue/50">
+                        <img src="https://images.habbo.com/c_images/catalogue/icon_276.png"
+                            class="w-8 h-8 group-hover:scale-110 transition-transform"
+                            style="image-rendering: pixelated;" alt="Design">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white font-pixel text-sm">DISEÑO ARQ</h3>
+                    <p class="text-slate-400 leading-relaxed text-sm">
+                        Creación de salas con estéticas que mezclan lo moderno (cristal/neo) con lo clásico
+                        (mármol/caoba). Uso optimizado de furnis HC y arquitectónicos.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 group border-t-4 border-t-habbo-gold">
+                    <div
+                        class="w-14 h-14 rounded-full bg-habbo-gold/20 flex items-center justify-center mb-6 border border-habbo-gold/50">
+                        <img src="https://images.habbo.com/c_images/catalogue/icon_206.png"
+                            class="w-8 h-8 group-hover:scale-110 transition-transform"
+                            style="image-rendering: pixelated;" alt="Management">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white font-pixel text-sm">GESTION DE OBRAS</h3>
+                    <p class="text-slate-400 leading-relaxed text-sm">
+                        Project Management certificado para construcciones masivas. Administramos presupuestos de
+                        créditos, compra de raros y logística de constructores.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 group border-t-4 border-t-red-500">
+                    <div
+                        class="w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center mb-6 border border-red-500/50">
+                        <img src="https://images.habbo.com/c_images/catalogue/icon_271.png"
+                            class="w-8 h-8 group-hover:scale-110 transition-transform"
+                            style="image-rendering: pixelated;" alt="Security">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white font-pixel text-sm">SEGURIDAD WIRED</h3>
+                    <p class="text-slate-400 leading-relaxed text-sm">
+                        Programación avanzada con sistemas Wired para pasillos de seguridad, juegos automáticos,
+                        teleportación restringida y protección anti-trolls.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos Section -->
+    <section id="proyectos" class="py-24 px-6 bg-[#0f172a]">
+        <div class="container mx-auto max-w-7xl">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-6">
+                <div>
+                    <span class="text-habbo-gold font-pixel text-xs tracking-widest uppercase mb-2 block">PORTAFOLIO
+                        EXCLUSIVO</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white">Obras Maestras</h2>
+                </div>
+                <a href="#"
+                    class="text-habbo-blue hover:text-white transition-colors mt-4 md:mt-0 font-bold flex items-center gap-2">
+                    Ver todo el catálogo →
+                </a>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <!-- Detalles del proyecto -->
+                <div class="lg:w-1/2 space-y-6">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded bg-habbo-blue/10 border border-habbo-blue/30 text-habbo-blue text-xs font-bold font-pixel">
+                        TIPO: SALA IMPERIAL
+                    </div>
+
+                    <h3 class="text-4xl lg:text-5xl font-bold text-white leading-tight">Palacio del <br>Zafiro Real</h3>
+
+                    <p class="text-slate-400 text-lg leading-relaxed border-l-2 border-habbo-blue pl-4">
+                        Un ejemplo magistral de nuestra capacidad para fusionar bloques de piedra pómez con acabados en
+                        madera noble de la HC y acentos en cristales boreales. Diseñado para sedes de agencias de alto
+                        tráfico.
+                    </p>
+
+                    <ul class="space-y-4 pt-4">
+                        <li class="flex items-center gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-habbo-blue/20 flex items-center justify-center text-habbo-blue">
+                                ✓</div>
+                            <span class="text-slate-300">Apilamiento glitch avanzado para paredes</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-habbo-blue/20 flex items-center justify-center text-habbo-blue">
+                                ✓</div>
+                            <span class="text-slate-300">Iluminación ambiental dinámica (Moodlight)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div
+                                class="w-6 h-6 rounded-full bg-habbo-blue/20 flex items-center justify-center text-habbo-blue">
+                                ✓</div>
+                            <span class="text-slate-300">Sistemas antimutantes y puerta wired</span>
+                        </li>
+                    </ul>
+
+                    <div class="pt-6 flex items-center gap-6">
+                        <div class="flex -space-x-4">
+                            <!-- Placeholder Avatars -->
+                            <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=wom&headonly=1"
+                                class="w-10 h-10 rounded-full border-2 border-[#0f172a] bg-slate-800" alt="Builder 1"
+                                style="image-rendering: pixelated;">
+                            <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=Alenna&headonly=1"
+                                class="w-10 h-10 rounded-full border-2 border-[#0f172a] bg-slate-800" alt="Builder 2"
+                                style="image-rendering: pixelated;">
+                        </div>
+                        <div class="text-sm">
+                            <p class="text-white font-bold">Constructores Asignados</p>
+                            <p class="text-slate-500">2 Especialistas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Imagen del proyecto -->
+                <div class="lg:w-1/2 relative w-full">
+                    <!-- Decoración detrás de la imagen -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-habbo-blue to-purple-600 rounded-2xl transform translate-x-4 translate-y-4 opacity-50 blur-lg">
+                    </div>
+
+                    <div
+                        class="relative rounded-2xl overflow-hidden glass-panel border border-white/20 shadow-2xl group">
+                        <!-- Replace image_5ddc9e.png with a placeholder habbo room or keep it if they upload it later -->
+                        <div
+                            class="aspect-video bg-slate-800 flex items-center justify-center relative overflow-hidden">
+                            <!-- Use a generic Habbo room image as placeholder if image_5ddc9e doesn't exist yet, but reference it in code -->
+                            <img src="image_5ddc9e.png"
+                                onerror="this.src='https://images.habbo.com/c_images/catalogue/icon_268.png'; this.style.width='auto'; this.style.height='auto';"
+                                alt="Sala Habbo"
+                                class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700">
+
+                            <!-- Overlay gradient -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+
+                            <!-- Status Label -->
+                            <div class="absolute bottom-6 left-6 flex items-center gap-3">
+                                <div class="bg-habbo-blue/90 backdrop-blur px-4 py-2 rounded-lg border border-white/20">
+                                    <p class="text-[10px] uppercase font-bold text-white/70 mb-1 tracking-widest">ESTADO
+                                        DO PROYECTO</p>
+                                    <p class="text-white font-pixel text-sm">FINALIZADO</p>
+                                </div>
+                                <div
+                                    class="bg-black/60 backdrop-blur px-4 py-2 rounded-lg border border-white/10 hidden sm:block">
+                                    <p class="text-[10px] uppercase font-bold text-white/70 mb-1 tracking-widest">
+                                        VALORACIÓN EST.</p>
+                                    <p class="text-habbo-gold font-pixel text-sm flex items-center gap-1">
+                                        450 <img src="https://images.habbo.com/c_images/catalogue/icon_256.png"
+                                            class="w-3 h-3" style="image-rendering:pixelated;" alt="c">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 px-6 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <p class="text-slate-500 text-sm">© 2026 Inmobiliaria ARQ por Alenna Art. Manizales, Colombia.</p>
-            <div class="flex gap-6">
-                <a href="#" class="text-slate-400 hover:text-arq-blue transition">GitHub</a>
-                <a href="#" class="text-slate-400 hover:text-arq-blue transition">Portfolio</a>
-                <a href="#" class="text-slate-400 hover:text-arq-blue transition">Habbo</a>
+    <!-- Call to Action -->
+    <section class="bg-habbo-blue py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-habbo-pattern opacity-10 mix-blend-overlay"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-3xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">¿Listo para elevar tu estatus en el hotel?</h2>
+            <p class="text-blue-100 text-lg mb-10">Agenda una consultoría gratuita en nuestras oficinas virtuales y
+                comencemos a diseñar el plano de tu próxima sala.</p>
+            <a href="https://www.habbo.es/" target="_blank"
+                class="inline-block habbo-pill text-black px-10 py-4 text-lg font-bold">
+                Buscar a ARQ en Habbo
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050810] py-12 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white/10 px-2 py-1 font-pixel text-lg rounded text-white border border-white/20">
+                        ARQ
+                    </div>
+                    <span class="font-bold text-slate-400">INMOBILIARIA</span>
+                </div>
+
+                <div class="flex gap-6">
+                    <a href="#" class="text-slate-500 hover:text-habbo-blue transition-colors font-medium">Portafolio
+                        Principal</a>
+                    <a href="#" class="text-slate-500 hover:text-habbo-blue transition-colors font-medium">GitHub</a>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-600">
+                <p>© 2026 Inmobiliaria ARQ por <span class="text-habbo-blue">Alenna Art</span>. Manizales, Colombia.</p>
+                <p class="flex items-center gap-2">
+                    Hecho con <span class="text-red-500">♥</span> y píxeles
+                </p>
+                <p class="text-xs">No afiliado oficialmente con Sulake Ltd.</p>
             </div>
         </div>
     </footer>
 
 </body>
+
 </html>
