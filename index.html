@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmobiliaria ARQ | Arquitectura Virtual en Habbo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-arq-blue { background-color: #0055ff; }
+        .text-arq-blue { color: #0055ff; }
+        .border-arq-wood { border-color: #8B4513; }
+        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('tu-sala-background.jpg') center/cover; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="bg-black text-white px-3 py-1 font-extrabold text-xl rounded">ARQ</div>
+            <span class="font-semibold tracking-tighter text-slate-700">INMOBILIARIA</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+            <a href="#proyectos" class="hover:text-arq-blue transition">Proyectos</a>
+            <a href="#servicios" class="hover:text-arq-blue transition">Servicios</a>
+            <a href="#nosotros" class="hover:text-arq-blue transition">Nosotros</a>
+        </div>
+        <a href="https://www.habbo.es/" target="_blank" class="bg-arq-blue text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+            Contactar en Habbo
+        </a>
+    </nav>
+
+    <section class="relative h-[80vh] flex items-center justify-center text-center px-6 hero-gradient">
+        <div class="max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+                Espacios que definen tu <span class="text-arq-blue">legado virtual</span>.
+            </h1>
+            <p class="text-xl text-slate-200 mb-10 max-w-2xl mx-auto">
+                Especialistas en diseño arquitectónico y gestión de proyectos para la comunidad de Manizales y el mundo digital.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#proyectos" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-slate-100 transition">Explorar Catálogo</a>
+                <a href="#contacto" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 backdrop-blur-sm transition">Solicitar Diseño</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-12">
+            <div class="space-y-4">
+                <div class="w-12 h-1 bg-arq-blue"></div>
+                <h3 class="text-2xl font-bold">Diseño ARQ</h3>
+                <p class="text-slate-600">Creación de salas con estéticas que mezclan lo moderno (cristal/azul) con lo clásico (madera/piedra).</p>
+            </div>
+            <div class="space-y-4">
+                <div class="w-12 h-1 bg-arq-blue"></div>
+                <h3 class="text-2xl font-bold">Project Management</h3>
+                <p class="text-slate-600">Gestión certificada de obras virtuales, desde el concepto hasta la entrega de llaves.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="w-12 h-1 bg-arq-blue"></div>
+                <h3 class="text-2xl font-bold">Seguridad Digital</h3>
+                <p class="text-slate-600">Consultoría en ciberseguridad para proteger tus activos y salas de accesos no autorizados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos" class="bg-slate-900 py-24 px-6 text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            <div class="md:w-1/2">
+                <span class="text-arq-blue font-bold tracking-widest uppercase text-sm">Proyecto Destacado</span>
+                <h2 class="text-4xl font-bold mt-4 mb-6">Escalinata Real: Texturas de Vanguardia</h2>
+                <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                    Un ejemplo de nuestra capacidad para fusionar bloques de piedra tallada con acabados en madera noble y acentos en rojo intenso, ideal para palacios o sedes universitarias.
+                </p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-2"><span class="text-arq-blue">✔</span> Acabados en piedra y madera</li>
+                    <li class="flex items-center gap-2"><span class="text-arq-blue">✔</span> Integración de alfombras de lujo</li>
+                    <li class="flex items-center gap-2"><span class="text-arq-blue">✔</span> Diseño optimizado para tránsito</li>
+                </ul>
+            </div>
+            <div class="md:w-1/2">
+                <div class="relative">
+                    <img src="image_5ddc9e.png" alt="Detalle Arquitectónico" class="rounded-2xl border-arq-wood border-b-8 shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 bg-arq-blue p-6 rounded-xl shadow-xl">
+                        <p class="text-xs uppercase tracking-widest opacity-80">Estado</p>
+                        <p class="text-xl font-bold">DISPONIBLE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 px-6 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <p class="text-slate-500 text-sm">© 2026 Inmobiliaria ARQ por Alenna Art. Manizales, Colombia.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-slate-400 hover:text-arq-blue transition">GitHub</a>
+                <a href="#" class="text-slate-400 hover:text-arq-blue transition">Portfolio</a>
+                <a href="#" class="text-slate-400 hover:text-arq-blue transition">Habbo</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
